@@ -134,7 +134,7 @@ namespace Microsoft.Azure.Commands.Compute
             Mandatory = false,
             ValueFromPipelineByPropertyName = true,
             HelpMessage = "Force re-run even if extension configuration has not changed")]
-        public SwitchParameter ForceRerun { get; set; }
+        public string ForceRerun { get; set; }
 
         public override void ExecuteCmdlet()
         {
@@ -161,7 +161,7 @@ namespace Microsoft.Azure.Commands.Compute
                     Settings = this.Settings,
                     ProtectedSettings = this.ProtectedSettings,
                     AutoUpgradeMinorVersion = !this.DisableAutoUpgradeMinorVersion.IsPresent,
-                    ForceUpdateTag = (this.ForceRerun.IsPresent) ? "RerunExtension" : null
+                    ForceUpdateTag = this.ForceRerun
                 };
 
                 var op = this.VirtualMachineExtensionClient.CreateOrUpdateWithHttpMessagesAsync(

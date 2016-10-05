@@ -83,6 +83,30 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             }
         }
 
+        public IDisksOperations DisksClient
+        {
+            get
+            {
+                return ComputeClient.ComputeManagementClient.Disks;
+            }
+        }
+
+        public IImagesOperations ImagesClient
+        {
+            get
+            {
+                return ComputeClient.ComputeManagementClient.Images;
+            }
+        }
+
+        public ISnapshotsOperations SnapshotsClient
+        {
+            get
+            {
+                return ComputeClient.ComputeManagementClient.Snapshots;
+            }
+        }
+
         public IVirtualMachineScaleSetsOperations VirtualMachineScaleSetsClient
         {
             get

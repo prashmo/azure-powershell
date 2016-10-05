@@ -58,6 +58,32 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "ContainerServiceDelete",
             "ContainerServiceGet",
             "ContainerServiceList",
+            "DiskCreateOrUpdate",
+            "DiskDelete",
+            "DiskGet",
+            "DiskGrantAccess",
+            "DiskList",
+            "DiskListAll",
+            "DiskListAllNext",
+            "DiskListNext",
+            "DiskRevokeAccess",
+            "DiskUpdate",
+            "ImageCreateOrUpdate",
+            "ImageDelete",
+            "ImageGet",
+            "ImageList",
+            "ImageListAll",
+            "ImageListAllNext",
+            "SnapshotCreateOrUpdate",
+            "SnapshotDelete",
+            "SnapshotGet",
+            "SnapshotGrantAccess",
+            "SnapshotList",
+            "SnapshotListAll",
+            "SnapshotListAllNext",
+            "SnapshotListNext",
+            "SnapshotRevokeAccess",
+            "SnapshotUpdate",
             "VirtualMachineScaleSetCreateOrUpdate",
             "VirtualMachineScaleSetDeallocate",
             "VirtualMachineScaleSetDelete",
@@ -127,6 +153,84 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                         break;
                     case "ContainerServiceList":
                         ExecuteContainerServiceListMethod(argumentList);
+                        break;
+                    case "DiskCreateOrUpdate":
+                        ExecuteDiskCreateOrUpdateMethod(argumentList);
+                        break;
+                    case "DiskDelete":
+                        ExecuteDiskDeleteMethod(argumentList);
+                        break;
+                    case "DiskGet":
+                        ExecuteDiskGetMethod(argumentList);
+                        break;
+                    case "DiskGrantAccess":
+                        ExecuteDiskGrantAccessMethod(argumentList);
+                        break;
+                    case "DiskList":
+                        ExecuteDiskListMethod(argumentList);
+                        break;
+                    case "DiskListAll":
+                        ExecuteDiskListAllMethod(argumentList);
+                        break;
+                    case "DiskListAllNext":
+                        ExecuteDiskListAllNextMethod(argumentList);
+                        break;
+                    case "DiskListNext":
+                        ExecuteDiskListNextMethod(argumentList);
+                        break;
+                    case "DiskRevokeAccess":
+                        ExecuteDiskRevokeAccessMethod(argumentList);
+                        break;
+                    case "DiskUpdate":
+                        ExecuteDiskUpdateMethod(argumentList);
+                        break;
+                    case "ImageCreateOrUpdate":
+                        ExecuteImageCreateOrUpdateMethod(argumentList);
+                        break;
+                    case "ImageDelete":
+                        ExecuteImageDeleteMethod(argumentList);
+                        break;
+                    case "ImageGet":
+                        ExecuteImageGetMethod(argumentList);
+                        break;
+                    case "ImageList":
+                        ExecuteImageListMethod(argumentList);
+                        break;
+                    case "ImageListAll":
+                        ExecuteImageListAllMethod(argumentList);
+                        break;
+                    case "ImageListAllNext":
+                        ExecuteImageListAllNextMethod(argumentList);
+                        break;
+                    case "SnapshotCreateOrUpdate":
+                        ExecuteSnapshotCreateOrUpdateMethod(argumentList);
+                        break;
+                    case "SnapshotDelete":
+                        ExecuteSnapshotDeleteMethod(argumentList);
+                        break;
+                    case "SnapshotGet":
+                        ExecuteSnapshotGetMethod(argumentList);
+                        break;
+                    case "SnapshotGrantAccess":
+                        ExecuteSnapshotGrantAccessMethod(argumentList);
+                        break;
+                    case "SnapshotList":
+                        ExecuteSnapshotListMethod(argumentList);
+                        break;
+                    case "SnapshotListAll":
+                        ExecuteSnapshotListAllMethod(argumentList);
+                        break;
+                    case "SnapshotListAllNext":
+                        ExecuteSnapshotListAllNextMethod(argumentList);
+                        break;
+                    case "SnapshotListNext":
+                        ExecuteSnapshotListNextMethod(argumentList);
+                        break;
+                    case "SnapshotRevokeAccess":
+                        ExecuteSnapshotRevokeAccessMethod(argumentList);
+                        break;
+                    case "SnapshotUpdate":
+                        ExecuteSnapshotUpdateMethod(argumentList);
                         break;
                     case "VirtualMachineScaleSetCreateOrUpdate":
                         ExecuteVirtualMachineScaleSetCreateOrUpdateMethod(argumentList);
@@ -223,6 +327,32 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "ContainerServiceDelete": return CreateContainerServiceDeleteDynamicParameters();
                 case "ContainerServiceGet": return CreateContainerServiceGetDynamicParameters();
                 case "ContainerServiceList": return CreateContainerServiceListDynamicParameters();
+                case "DiskCreateOrUpdate": return CreateDiskCreateOrUpdateDynamicParameters();
+                case "DiskDelete": return CreateDiskDeleteDynamicParameters();
+                case "DiskGet": return CreateDiskGetDynamicParameters();
+                case "DiskGrantAccess": return CreateDiskGrantAccessDynamicParameters();
+                case "DiskList": return CreateDiskListDynamicParameters();
+                case "DiskListAll": return CreateDiskListAllDynamicParameters();
+                case "DiskListAllNext": return CreateDiskListAllNextDynamicParameters();
+                case "DiskListNext": return CreateDiskListNextDynamicParameters();
+                case "DiskRevokeAccess": return CreateDiskRevokeAccessDynamicParameters();
+                case "DiskUpdate": return CreateDiskUpdateDynamicParameters();
+                case "ImageCreateOrUpdate": return CreateImageCreateOrUpdateDynamicParameters();
+                case "ImageDelete": return CreateImageDeleteDynamicParameters();
+                case "ImageGet": return CreateImageGetDynamicParameters();
+                case "ImageList": return CreateImageListDynamicParameters();
+                case "ImageListAll": return CreateImageListAllDynamicParameters();
+                case "ImageListAllNext": return CreateImageListAllNextDynamicParameters();
+                case "SnapshotCreateOrUpdate": return CreateSnapshotCreateOrUpdateDynamicParameters();
+                case "SnapshotDelete": return CreateSnapshotDeleteDynamicParameters();
+                case "SnapshotGet": return CreateSnapshotGetDynamicParameters();
+                case "SnapshotGrantAccess": return CreateSnapshotGrantAccessDynamicParameters();
+                case "SnapshotList": return CreateSnapshotListDynamicParameters();
+                case "SnapshotListAll": return CreateSnapshotListAllDynamicParameters();
+                case "SnapshotListAllNext": return CreateSnapshotListAllNextDynamicParameters();
+                case "SnapshotListNext": return CreateSnapshotListNextDynamicParameters();
+                case "SnapshotRevokeAccess": return CreateSnapshotRevokeAccessDynamicParameters();
+                case "SnapshotUpdate": return CreateSnapshotUpdateDynamicParameters();
                 case "VirtualMachineScaleSetCreateOrUpdate": return CreateVirtualMachineScaleSetCreateOrUpdateDynamicParameters();
                 case "VirtualMachineScaleSetDeallocate": return CreateVirtualMachineScaleSetDeallocateDynamicParameters();
                 case "VirtualMachineScaleSetDelete": return CreateVirtualMachineScaleSetDeleteDynamicParameters();

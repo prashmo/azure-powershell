@@ -28,9 +28,9 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("Add", "AzureRmVmssExtension")]
+    [Cmdlet("Add", "AzureRmVmssDataDisk")]
     [OutputType(typeof(VirtualMachineScaleSet))]
-    public class AddAzureRmVmssExtensionCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
+    public class AddAzureRmVmssDataDiskCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
         [Parameter(
             Mandatory = true,
@@ -49,37 +49,25 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 2,
             ValueFromPipelineByPropertyName = true)]
-        public string Publisher { get; set; }
+        public int Lun { get; set; }
 
         [Parameter(
             Mandatory = false,
             Position = 3,
             ValueFromPipelineByPropertyName = true)]
-        public string Type { get; set; }
+        public CachingTypes? Caching { get; set; }
 
         [Parameter(
             Mandatory = false,
             Position = 4,
             ValueFromPipelineByPropertyName = true)]
-        public string TypeHandlerVersion { get; set; }
+        public DiskCreateOptionTypes CreateOption { get; set; }
 
         [Parameter(
             Mandatory = false,
             Position = 5,
             ValueFromPipelineByPropertyName = true)]
-        public bool? AutoUpgradeMinorVersion { get; set; }
-
-        [Parameter(
-            Mandatory = false,
-            Position = 6,
-            ValueFromPipelineByPropertyName = true)]
-        public Object Setting { get; set; }
-
-        [Parameter(
-            Mandatory = false,
-            Position = 7,
-            ValueFromPipelineByPropertyName = true)]
-        public Object ProtectedSetting { get; set; }
+        public int? DiskSizeGB { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -89,28 +77,26 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 this.VirtualMachineScaleSet.VirtualMachineProfile = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMProfile();
             }
 
-            // ExtensionProfile
-            if (this.VirtualMachineScaleSet.VirtualMachineProfile.ExtensionProfile == null)
+            // StorageProfile
+            if (this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile == null)
             {
-                this.VirtualMachineScaleSet.VirtualMachineProfile.ExtensionProfile = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetExtensionProfile();
+                this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetStorageProfile();
             }
 
-            // Extensions
-            if (this.VirtualMachineScaleSet.VirtualMachineProfile.ExtensionProfile.Extensions == null)
+            // DataDisks
+            if (this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile.DataDisks == null)
             {
-                this.VirtualMachineScaleSet.VirtualMachineProfile.ExtensionProfile.Extensions = new List<Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetExtension>();
+                this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile.DataDisks = new List<Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetDataDisk>();
             }
 
-            var vExtensions = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetExtension();
+            var vDataDisks = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetDataDisk();
 
-            vExtensions.Name = this.Name;
-            vExtensions.Publisher = this.Publisher;
-            vExtensions.Type = this.Type;
-            vExtensions.TypeHandlerVersion = this.TypeHandlerVersion;
-            vExtensions.AutoUpgradeMinorVersion = this.AutoUpgradeMinorVersion;
-            vExtensions.Settings = this.Setting;
-            vExtensions.ProtectedSettings = this.ProtectedSetting;
-            this.VirtualMachineScaleSet.VirtualMachineProfile.ExtensionProfile.Extensions.Add(vExtensions);
+            vDataDisks.Name = this.Name;
+            vDataDisks.Lun = this.Lun;
+            vDataDisks.Caching = this.Caching;
+            vDataDisks.CreateOption = this.CreateOption;
+            vDataDisks.DiskSizeGB = this.DiskSizeGB;
+            this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile.DataDisks.Add(vDataDisks);
             WriteObject(this.VirtualMachineScaleSet);
         }
     }

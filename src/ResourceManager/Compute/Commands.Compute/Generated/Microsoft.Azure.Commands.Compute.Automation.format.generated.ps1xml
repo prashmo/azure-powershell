@@ -71,6 +71,74 @@
       </TableControl>
     </View>
     <View>
+      <Name>Microsoft.Azure.Management.Compute.Models.Disk</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Azure.Management.Compute.Models.Disk</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>[Microsoft.Azure.Commands.Compute.Automation.ComputeAutomationBaseCmdlet]::FormatObject($_)</ScriptBlock>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>Microsoft.Azure.Management.Compute.Models.AccessUri</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Azure.Management.Compute.Models.AccessUri</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>[Microsoft.Azure.Commands.Compute.Automation.ComputeAutomationBaseCmdlet]::FormatObject($_)</ScriptBlock>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>Microsoft.Azure.Management.Compute.Models.Image</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Azure.Management.Compute.Models.Image</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>[Microsoft.Azure.Commands.Compute.Automation.ComputeAutomationBaseCmdlet]::FormatObject($_)</ScriptBlock>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
+      <Name>Microsoft.Azure.Management.Compute.Models.Snapshot</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Azure.Management.Compute.Models.Snapshot</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>[Microsoft.Azure.Commands.Compute.Automation.ComputeAutomationBaseCmdlet]::FormatObject($_)</ScriptBlock>
+              </ExpressionBinding>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
+    <View>
       <Name>Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSet</Name>
       <ViewSelectedBy>
         <TypeName>Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSet</TypeName>

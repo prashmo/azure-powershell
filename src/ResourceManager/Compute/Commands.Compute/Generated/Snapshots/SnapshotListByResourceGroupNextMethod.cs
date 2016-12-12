@@ -34,16 +34,28 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 {
     public partial class InvokeAzureComputeMethodCmdlet : ComputeAutomationBaseCmdlet
     {
-        protected object CreateImageListAllDynamicParameters()
+        protected object CreateSnapshotListByResourceGroupNextDynamicParameters()
         {
             dynamicParameters = new RuntimeDefinedParameterDictionary();
+            var pNextPageLink = new RuntimeDefinedParameter();
+            pNextPageLink.Name = "NextPageLink";
+            pNextPageLink.ParameterType = typeof(string);
+            pNextPageLink.Attributes.Add(new ParameterAttribute
+            {
+                ParameterSetName = "InvokeByDynamicParameters",
+                Position = 1,
+                Mandatory = true
+            });
+            pNextPageLink.Attributes.Add(new AllowNullAttribute());
+            dynamicParameters.Add("NextPageLink", pNextPageLink);
+
             var pArgumentList = new RuntimeDefinedParameter();
             pArgumentList.Name = "ArgumentList";
             pArgumentList.ParameterType = typeof(object[]);
             pArgumentList.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByStaticParameters",
-                Position = 1,
+                Position = 2,
                 Mandatory = true
             });
             pArgumentList.Attributes.Add(new AllowNullAttribute());
@@ -52,30 +64,24 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             return dynamicParameters;
         }
 
-        protected void ExecuteImageListAllMethod(object[] invokeMethodInputParameters)
+        protected void ExecuteSnapshotListByResourceGroupNextMethod(object[] invokeMethodInputParameters)
         {
+            string nextPageLink = (string)ParseParameter(invokeMethodInputParameters[0]);
 
-            var result = ImagesClient.ListAll();
-            var resultList = result.ToList();
-            var nextPageLink = result.NextPageLink;
-            while (!string.IsNullOrEmpty(nextPageLink))
-            {
-                var pageResult = ImagesClient.ListAllNext(nextPageLink);
-                foreach (var pageItem in pageResult)
-                {
-                    resultList.Add(pageItem);
-                }
-                nextPageLink = pageResult.NextPageLink;
-            }
-            WriteObject(resultList, true);
+            var result = SnapshotsClient.ListByResourceGroupNext(nextPageLink);
+            WriteObject(result);
         }
     }
 
     public partial class NewAzureComputeArgumentListCmdlet : ComputeAutomationBaseCmdlet
     {
-        protected PSArgument[] CreateImageListAllParameters()
+        protected PSArgument[] CreateSnapshotListByResourceGroupNextParameters()
         {
-            return ConvertFromObjectsToArguments(new string[0], new object[0]);
+            string nextPageLink = string.Empty;
+
+            return ConvertFromObjectsToArguments(
+                 new string[] { "NextPageLink" },
+                 new object[] { nextPageLink });
         }
     }
 }

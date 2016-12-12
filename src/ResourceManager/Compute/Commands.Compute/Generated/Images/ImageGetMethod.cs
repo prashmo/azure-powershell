@@ -101,12 +101,12 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             }
             else if (!string.IsNullOrEmpty(resourceGroupName))
             {
-                var result = ImagesClient.List(resourceGroupName);
+                var result = ImagesClient.ListByResourceGroup(resourceGroupName);
                 WriteObject(result);
             }
             else
             {
-                var result = ImagesClient.ListAll();
+                var result = ImagesClient.List();
                 WriteObject(result);
             }
         }

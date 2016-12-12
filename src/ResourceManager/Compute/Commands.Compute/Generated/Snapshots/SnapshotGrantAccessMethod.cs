@@ -61,17 +61,17 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             pSnapshotName.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("SnapshotName", pSnapshotName);
 
-            var pAccessData = new RuntimeDefinedParameter();
-            pAccessData.Name = "AccessData";
-            pAccessData.ParameterType = typeof(AccessData);
-            pAccessData.Attributes.Add(new ParameterAttribute
+            var pGrantAccessData = new RuntimeDefinedParameter();
+            pGrantAccessData.Name = "GrantAccessData";
+            pGrantAccessData.ParameterType = typeof(GrantAccessData);
+            pGrantAccessData.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
                 Position = 3,
                 Mandatory = true
             });
-            pAccessData.Attributes.Add(new AllowNullAttribute());
-            dynamicParameters.Add("AccessData", pAccessData);
+            pGrantAccessData.Attributes.Add(new AllowNullAttribute());
+            dynamicParameters.Add("GrantAccessData", pGrantAccessData);
 
             var pArgumentList = new RuntimeDefinedParameter();
             pArgumentList.Name = "ArgumentList";
@@ -92,9 +92,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = (string)ParseParameter(invokeMethodInputParameters[0]);
             string snapshotName = (string)ParseParameter(invokeMethodInputParameters[1]);
-            AccessData accessData = (AccessData)ParseParameter(invokeMethodInputParameters[2]);
+            GrantAccessData grantAccessData = (GrantAccessData)ParseParameter(invokeMethodInputParameters[2]);
 
-            var result = SnapshotsClient.GrantAccess(resourceGroupName, snapshotName, accessData);
+            var result = SnapshotsClient.GrantAccess(resourceGroupName, snapshotName, grantAccessData);
             WriteObject(result);
         }
     }
@@ -105,11 +105,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = string.Empty;
             string snapshotName = string.Empty;
-            AccessData accessData = new AccessData();
+            GrantAccessData grantAccessData = new GrantAccessData();
 
             return ConvertFromObjectsToArguments(
-                 new string[] { "ResourceGroupName", "SnapshotName", "AccessData" },
-                 new object[] { resourceGroupName, snapshotName, accessData });
+                 new string[] { "ResourceGroupName", "SnapshotName", "GrantAccessData" },
+                 new object[] { resourceGroupName, snapshotName, grantAccessData });
         }
     }
 
@@ -153,18 +153,18 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             pSnapshotName.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("SnapshotName", pSnapshotName);
 
-            var pAccessData = new RuntimeDefinedParameter();
-            pAccessData.Name = "AccessData";
-            pAccessData.ParameterType = typeof(AccessData);
-            pAccessData.Attributes.Add(new ParameterAttribute
+            var pGrantAccessData = new RuntimeDefinedParameter();
+            pGrantAccessData.Name = "GrantAccessData";
+            pGrantAccessData.ParameterType = typeof(GrantAccessData);
+            pGrantAccessData.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
                 Position = 3,
                 Mandatory = true,
                 ValueFromPipeline = false
             });
-            pAccessData.Attributes.Add(new AllowNullAttribute());
-            dynamicParameters.Add("AccessData", pAccessData);
+            pGrantAccessData.Attributes.Add(new AllowNullAttribute());
+            dynamicParameters.Add("GrantAccessData", pGrantAccessData);
 
             return dynamicParameters;
         }

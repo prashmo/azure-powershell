@@ -34,7 +34,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 {
     public partial class InvokeAzureComputeMethodCmdlet : ComputeAutomationBaseCmdlet
     {
-        protected object CreateSnapshotListAllNextDynamicParameters()
+        protected object CreateDiskListByResourceGroupNextDynamicParameters()
         {
             dynamicParameters = new RuntimeDefinedParameterDictionary();
             var pNextPageLink = new RuntimeDefinedParameter();
@@ -64,18 +64,18 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             return dynamicParameters;
         }
 
-        protected void ExecuteSnapshotListAllNextMethod(object[] invokeMethodInputParameters)
+        protected void ExecuteDiskListByResourceGroupNextMethod(object[] invokeMethodInputParameters)
         {
             string nextPageLink = (string)ParseParameter(invokeMethodInputParameters[0]);
 
-            var result = SnapshotsClient.ListAllNext(nextPageLink);
+            var result = DisksClient.ListByResourceGroupNext(nextPageLink);
             WriteObject(result);
         }
     }
 
     public partial class NewAzureComputeArgumentListCmdlet : ComputeAutomationBaseCmdlet
     {
-        protected PSArgument[] CreateSnapshotListAllNextParameters()
+        protected PSArgument[] CreateDiskListByResourceGroupNextParameters()
         {
             string nextPageLink = string.Empty;
 

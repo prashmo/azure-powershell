@@ -63,7 +63,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var pDisk = new RuntimeDefinedParameter();
             pDisk.Name = "Disk";
-            pDisk.ParameterType = typeof(Disk);
+            pDisk.ParameterType = typeof(DiskUpdate);
             pDisk.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
@@ -92,7 +92,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = (string)ParseParameter(invokeMethodInputParameters[0]);
             string diskName = (string)ParseParameter(invokeMethodInputParameters[1]);
-            Disk disk = (Disk)ParseParameter(invokeMethodInputParameters[2]);
+            DiskUpdate disk = (DiskUpdate)ParseParameter(invokeMethodInputParameters[2]);
 
             var result = DisksClient.Update(resourceGroupName, diskName, disk);
             WriteObject(result);
@@ -105,7 +105,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = string.Empty;
             string diskName = string.Empty;
-            Disk disk = new Disk();
+            DiskUpdate disk = new DiskUpdate();
 
             return ConvertFromObjectsToArguments(
                  new string[] { "ResourceGroupName", "DiskName", "Disk" },
@@ -158,13 +158,13 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var pDisk = new RuntimeDefinedParameter();
             pDisk.Name = "Disk";
-            pDisk.ParameterType = typeof(Disk);
+            pDisk.ParameterType = typeof(DiskUpdate);
             pDisk.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
                 Position = 3,
                 Mandatory = true,
-                ValueFromPipeline = true
+                ValueFromPipeline = false
             });
             pDisk.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("Disk", pDisk);

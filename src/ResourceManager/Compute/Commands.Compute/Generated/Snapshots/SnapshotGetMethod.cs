@@ -88,12 +88,12 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             }
             else if (!string.IsNullOrEmpty(resourceGroupName))
             {
-                var result = SnapshotsClient.List(resourceGroupName);
+                var result = SnapshotsClient.ListByResourceGroup(resourceGroupName);
                 WriteObject(result);
             }
             else
             {
-                var result = SnapshotsClient.ListAll();
+                var result = SnapshotsClient.List();
                 WriteObject(result);
             }
         }

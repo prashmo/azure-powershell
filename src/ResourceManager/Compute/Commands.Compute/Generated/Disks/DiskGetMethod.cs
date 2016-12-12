@@ -88,12 +88,12 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             }
             else if (!string.IsNullOrEmpty(resourceGroupName))
             {
-                var result = DisksClient.List(resourceGroupName);
+                var result = DisksClient.ListByResourceGroup(resourceGroupName);
                 WriteObject(result);
             }
             else
             {
-                var result = DisksClient.ListAll();
+                var result = DisksClient.List();
                 WriteObject(result);
             }
         }

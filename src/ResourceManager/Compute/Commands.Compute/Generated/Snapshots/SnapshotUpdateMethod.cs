@@ -63,7 +63,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var pSnapshot = new RuntimeDefinedParameter();
             pSnapshot.Name = "Snapshot";
-            pSnapshot.ParameterType = typeof(Snapshot);
+            pSnapshot.ParameterType = typeof(SnapshotUpdate);
             pSnapshot.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
@@ -92,7 +92,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = (string)ParseParameter(invokeMethodInputParameters[0]);
             string snapshotName = (string)ParseParameter(invokeMethodInputParameters[1]);
-            Snapshot snapshot = (Snapshot)ParseParameter(invokeMethodInputParameters[2]);
+            SnapshotUpdate snapshot = (SnapshotUpdate)ParseParameter(invokeMethodInputParameters[2]);
 
             var result = SnapshotsClient.Update(resourceGroupName, snapshotName, snapshot);
             WriteObject(result);
@@ -105,7 +105,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = string.Empty;
             string snapshotName = string.Empty;
-            Snapshot snapshot = new Snapshot();
+            SnapshotUpdate snapshot = new SnapshotUpdate();
 
             return ConvertFromObjectsToArguments(
                  new string[] { "ResourceGroupName", "SnapshotName", "Snapshot" },
@@ -158,13 +158,13 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var pSnapshot = new RuntimeDefinedParameter();
             pSnapshot.Name = "Snapshot";
-            pSnapshot.ParameterType = typeof(Snapshot);
+            pSnapshot.ParameterType = typeof(SnapshotUpdate);
             pSnapshot.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
                 Position = 3,
                 Mandatory = true,
-                ValueFromPipeline = true
+                ValueFromPipeline = false
             });
             pSnapshot.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("Snapshot", pSnapshot);

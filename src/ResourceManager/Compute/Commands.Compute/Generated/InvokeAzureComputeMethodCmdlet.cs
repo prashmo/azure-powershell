@@ -63,8 +63,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "DiskGet",
             "DiskGrantAccess",
             "DiskList",
-            "DiskListAll",
-            "DiskListAllNext",
+            "DiskListByResourceGroup",
+            "DiskListByResourceGroupNext",
             "DiskListNext",
             "DiskRevokeAccess",
             "DiskUpdate",
@@ -72,15 +72,15 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "ImageDelete",
             "ImageGet",
             "ImageList",
-            "ImageListAll",
-            "ImageListAllNext",
+            "ImageListByResourceGroup",
+            "ImageListNext",
             "SnapshotCreateOrUpdate",
             "SnapshotDelete",
             "SnapshotGet",
             "SnapshotGrantAccess",
             "SnapshotList",
-            "SnapshotListAll",
-            "SnapshotListAllNext",
+            "SnapshotListByResourceGroup",
+            "SnapshotListByResourceGroupNext",
             "SnapshotListNext",
             "SnapshotRevokeAccess",
             "SnapshotUpdate",
@@ -169,11 +169,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     case "DiskList":
                         ExecuteDiskListMethod(argumentList);
                         break;
-                    case "DiskListAll":
-                        ExecuteDiskListAllMethod(argumentList);
+                    case "DiskListByResourceGroup":
+                        ExecuteDiskListByResourceGroupMethod(argumentList);
                         break;
-                    case "DiskListAllNext":
-                        ExecuteDiskListAllNextMethod(argumentList);
+                    case "DiskListByResourceGroupNext":
+                        ExecuteDiskListByResourceGroupNextMethod(argumentList);
                         break;
                     case "DiskListNext":
                         ExecuteDiskListNextMethod(argumentList);
@@ -196,11 +196,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     case "ImageList":
                         ExecuteImageListMethod(argumentList);
                         break;
-                    case "ImageListAll":
-                        ExecuteImageListAllMethod(argumentList);
+                    case "ImageListByResourceGroup":
+                        ExecuteImageListByResourceGroupMethod(argumentList);
                         break;
-                    case "ImageListAllNext":
-                        ExecuteImageListAllNextMethod(argumentList);
+                    case "ImageListNext":
+                        ExecuteImageListNextMethod(argumentList);
                         break;
                     case "SnapshotCreateOrUpdate":
                         ExecuteSnapshotCreateOrUpdateMethod(argumentList);
@@ -217,11 +217,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     case "SnapshotList":
                         ExecuteSnapshotListMethod(argumentList);
                         break;
-                    case "SnapshotListAll":
-                        ExecuteSnapshotListAllMethod(argumentList);
+                    case "SnapshotListByResourceGroup":
+                        ExecuteSnapshotListByResourceGroupMethod(argumentList);
                         break;
-                    case "SnapshotListAllNext":
-                        ExecuteSnapshotListAllNextMethod(argumentList);
+                    case "SnapshotListByResourceGroupNext":
+                        ExecuteSnapshotListByResourceGroupNextMethod(argumentList);
                         break;
                     case "SnapshotListNext":
                         ExecuteSnapshotListNextMethod(argumentList);
@@ -332,8 +332,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "DiskGet": return CreateDiskGetDynamicParameters();
                 case "DiskGrantAccess": return CreateDiskGrantAccessDynamicParameters();
                 case "DiskList": return CreateDiskListDynamicParameters();
-                case "DiskListAll": return CreateDiskListAllDynamicParameters();
-                case "DiskListAllNext": return CreateDiskListAllNextDynamicParameters();
+                case "DiskListByResourceGroup": return CreateDiskListByResourceGroupDynamicParameters();
+                case "DiskListByResourceGroupNext": return CreateDiskListByResourceGroupNextDynamicParameters();
                 case "DiskListNext": return CreateDiskListNextDynamicParameters();
                 case "DiskRevokeAccess": return CreateDiskRevokeAccessDynamicParameters();
                 case "DiskUpdate": return CreateDiskUpdateDynamicParameters();
@@ -341,15 +341,15 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "ImageDelete": return CreateImageDeleteDynamicParameters();
                 case "ImageGet": return CreateImageGetDynamicParameters();
                 case "ImageList": return CreateImageListDynamicParameters();
-                case "ImageListAll": return CreateImageListAllDynamicParameters();
-                case "ImageListAllNext": return CreateImageListAllNextDynamicParameters();
+                case "ImageListByResourceGroup": return CreateImageListByResourceGroupDynamicParameters();
+                case "ImageListNext": return CreateImageListNextDynamicParameters();
                 case "SnapshotCreateOrUpdate": return CreateSnapshotCreateOrUpdateDynamicParameters();
                 case "SnapshotDelete": return CreateSnapshotDeleteDynamicParameters();
                 case "SnapshotGet": return CreateSnapshotGetDynamicParameters();
                 case "SnapshotGrantAccess": return CreateSnapshotGrantAccessDynamicParameters();
                 case "SnapshotList": return CreateSnapshotListDynamicParameters();
-                case "SnapshotListAll": return CreateSnapshotListAllDynamicParameters();
-                case "SnapshotListAllNext": return CreateSnapshotListAllNextDynamicParameters();
+                case "SnapshotListByResourceGroup": return CreateSnapshotListByResourceGroupDynamicParameters();
+                case "SnapshotListByResourceGroupNext": return CreateSnapshotListByResourceGroupNextDynamicParameters();
                 case "SnapshotListNext": return CreateSnapshotListNextDynamicParameters();
                 case "SnapshotRevokeAccess": return CreateSnapshotRevokeAccessDynamicParameters();
                 case "SnapshotUpdate": return CreateSnapshotUpdateDynamicParameters();

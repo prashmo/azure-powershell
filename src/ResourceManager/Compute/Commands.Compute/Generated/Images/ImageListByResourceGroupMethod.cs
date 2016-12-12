@@ -34,16 +34,28 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 {
     public partial class InvokeAzureComputeMethodCmdlet : ComputeAutomationBaseCmdlet
     {
-        protected object CreateDiskListAllDynamicParameters()
+        protected object CreateImageListByResourceGroupDynamicParameters()
         {
             dynamicParameters = new RuntimeDefinedParameterDictionary();
+            var pResourceGroupName = new RuntimeDefinedParameter();
+            pResourceGroupName.Name = "ResourceGroupName";
+            pResourceGroupName.ParameterType = typeof(string);
+            pResourceGroupName.Attributes.Add(new ParameterAttribute
+            {
+                ParameterSetName = "InvokeByDynamicParameters",
+                Position = 1,
+                Mandatory = true
+            });
+            pResourceGroupName.Attributes.Add(new AllowNullAttribute());
+            dynamicParameters.Add("ResourceGroupName", pResourceGroupName);
+
             var pArgumentList = new RuntimeDefinedParameter();
             pArgumentList.Name = "ArgumentList";
             pArgumentList.ParameterType = typeof(object[]);
             pArgumentList.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByStaticParameters",
-                Position = 1,
+                Position = 2,
                 Mandatory = true
             });
             pArgumentList.Attributes.Add(new AllowNullAttribute());
@@ -52,30 +64,24 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             return dynamicParameters;
         }
 
-        protected void ExecuteDiskListAllMethod(object[] invokeMethodInputParameters)
+        protected void ExecuteImageListByResourceGroupMethod(object[] invokeMethodInputParameters)
         {
+            string resourceGroupName = (string)ParseParameter(invokeMethodInputParameters[0]);
 
-            var result = DisksClient.ListAll();
-            var resultList = result.ToList();
-            var nextPageLink = result.NextPageLink;
-            while (!string.IsNullOrEmpty(nextPageLink))
-            {
-                var pageResult = DisksClient.ListAllNext(nextPageLink);
-                foreach (var pageItem in pageResult)
-                {
-                    resultList.Add(pageItem);
-                }
-                nextPageLink = pageResult.NextPageLink;
-            }
-            WriteObject(resultList, true);
+            var result = ImagesClient.ListByResourceGroup(resourceGroupName);
+            WriteObject(result);
         }
     }
 
     public partial class NewAzureComputeArgumentListCmdlet : ComputeAutomationBaseCmdlet
     {
-        protected PSArgument[] CreateDiskListAllParameters()
+        protected PSArgument[] CreateImageListByResourceGroupParameters()
         {
-            return ConvertFromObjectsToArguments(new string[0], new object[0]);
+            string resourceGroupName = string.Empty;
+
+            return ConvertFromObjectsToArguments(
+                 new string[] { "ResourceGroupName" },
+                 new object[] { resourceGroupName });
         }
     }
 }

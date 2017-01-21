@@ -128,6 +128,14 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             }
         }
 
+        public IVirtualMachinesOperations VirtualMachinesClient
+        {
+            get
+            {
+                return ComputeClient.ComputeManagementClient.VirtualMachines;
+            }
+        }
+
         public static string FormatObject(Object obj)
         {
             var objType = obj.GetType();

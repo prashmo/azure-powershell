@@ -65,6 +65,10 @@ namespace Microsoft.Azure.Commands.Compute.Automation.Models
             Mapper.CreateMap<FROM.VirtualMachineScaleSet, TO.PSVirtualMachineScaleSetList>();
             Mapper.CreateMap<FROM.VirtualMachineScaleSetVM, TO.PSVirtualMachineScaleSetVM>();
             Mapper.CreateMap<FROM.VirtualMachineScaleSetVM, TO.PSVirtualMachineScaleSetVMList>();
+            Mapper.CreateMap<FROM.VirtualMachine, TO.PSVirtualMachine>();
+            Mapper.CreateMap<FROM.VirtualMachine, TO.PSVirtualMachineList>();
+            Mapper.CreateMap<FROM.VirtualMachine, TO.PSVirtualMachine>();
+            Mapper.CreateMap<FROM.VirtualMachine, TO.PSVirtualMachineList>();
 
         }
     }

@@ -71,6 +71,19 @@ namespace Microsoft.Azure.Commands.Compute
         protected override void Configure()
         {
             // => PSComputeLongrunningOperation
+            Mapper.CreateMap<Rest.Azure.AzureOperationResponse<FROM.OperationStatusResponse>, TO.PSComputeLongRunningOperation>()
+                .ForMember(c => c.OperationId, o => o.MapFrom(r => JsonConvert.DeserializeObject<TO.PSComputeLongRunningOperation>(
+                    r.Response.Content.ReadAsStringAsync().Result).OperationId))
+                .ForMember(c => c.Status, o => o.MapFrom(r => JsonConvert.DeserializeObject<TO.PSComputeLongRunningOperation>(
+                    r.Response.Content.ReadAsStringAsync().Result).Status))
+                .ForMember(c => c.StartTime, o => o.MapFrom(r => JsonConvert.DeserializeObject<TO.PSComputeLongRunningOperation>(
+                    r.Response.Content.ReadAsStringAsync().Result).StartTime))
+                .ForMember(c => c.EndTime, o => o.MapFrom(r => JsonConvert.DeserializeObject<TO.PSComputeLongRunningOperation>(
+                    r.Response.Content.ReadAsStringAsync().Result).EndTime))
+                .ForMember(c => c.Error, o => o.MapFrom(r => JsonConvert.DeserializeObject<TO.PSComputeLongRunningOperation>(
+                    r.Response.Content.ReadAsStringAsync().Result).Error));
+
+            // => PSComputeLongrunningOperation
             Mapper.CreateMap<Rest.Azure.AzureOperationResponse, TO.PSComputeLongRunningOperation>()
                 .ForMember(c => c.OperationId, o => o.MapFrom(r => JsonConvert.DeserializeObject<TO.PSComputeLongRunningOperation>(
                     r.Response.Content.ReadAsStringAsync().Result).OperationId))
@@ -121,6 +134,11 @@ namespace Microsoft.Azure.Commands.Compute
 
             // => PSAzureOperationResponse
             Mapper.CreateMap<Rest.Azure.AzureOperationResponse, TO.PSAzureOperationResponse>()
+                .ForMember(c => c.StatusCode, o => o.MapFrom(r => r.Response.StatusCode))
+                .ForMember(c => c.IsSuccessStatusCode, o => o.MapFrom(r => r.Response.IsSuccessStatusCode))
+                .ForMember(c => c.ReasonPhrase, o => o.MapFrom(r => r.Response.ReasonPhrase));
+
+            Mapper.CreateMap<Rest.Azure.AzureOperationResponse<FROM.OperationStatusResponse>, TO.PSAzureOperationResponse>()
                 .ForMember(c => c.StatusCode, o => o.MapFrom(r => r.Response.StatusCode))
                 .ForMember(c => c.IsSuccessStatusCode, o => o.MapFrom(r => r.Response.IsSuccessStatusCode))
                 .ForMember(c => c.ReasonPhrase, o => o.MapFrom(r => r.Response.ReasonPhrase));

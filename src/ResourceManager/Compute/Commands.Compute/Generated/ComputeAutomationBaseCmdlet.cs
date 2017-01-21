@@ -80,11 +80,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             return objects;
         }
 
-        public IContainerServiceOperations ContainerServiceClient
+        public IContainerServicesOperations ContainerServicesClient
         {
             get
             {
-                return ComputeClient.ComputeManagementClient.ContainerService;
+                return ComputeClient.ComputeManagementClient.ContainerServices;
             }
         }
 

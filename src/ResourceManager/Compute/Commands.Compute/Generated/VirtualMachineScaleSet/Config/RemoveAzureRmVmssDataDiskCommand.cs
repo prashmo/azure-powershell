@@ -42,12 +42,14 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         [Parameter(
             Mandatory = true,
             Position = 1,
+            ParameterSetName = "NameParameterSet",
             ValueFromPipelineByPropertyName = true)]
         public string Name { get; set; }
 
         [Parameter(
             Mandatory = true,
-            Position = 2,
+            Position = 1,
+            ParameterSetName = "LunParameterSet",
             ValueFromPipelineByPropertyName = true)]
         public int? Lun { get; set; }
 
@@ -75,8 +77,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             }
             var vDataDisks = this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile.DataDisks.First
                 (e =>
-                    (e.Name == this.Name)
-                    || (e.Lun == this.Lun)
+                    (this.Name != null && e.Name == this.Name)
+                    || (this.Lun != null && e.Lun == this.Lun)
                 );
 
             if (vDataDisks != null)

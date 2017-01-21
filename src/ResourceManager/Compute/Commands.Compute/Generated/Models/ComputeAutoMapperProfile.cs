@@ -53,6 +53,12 @@ namespace Microsoft.Azure.Commands.Compute.Automation.Models
         {
             Mapper.CreateMap<FROM.ContainerService, TO.PSContainerService>();
             Mapper.CreateMap<FROM.ContainerService, TO.PSContainerServiceList>();
+            Mapper.CreateMap<FROM.Disk, TO.PSDisk>();
+            Mapper.CreateMap<FROM.Disk, TO.PSDiskList>();
+            Mapper.CreateMap<FROM.Image, TO.PSImage>();
+            Mapper.CreateMap<FROM.Image, TO.PSImageList>();
+            Mapper.CreateMap<FROM.Snapshot, TO.PSSnapshot>();
+            Mapper.CreateMap<FROM.Snapshot, TO.PSSnapshotList>();
             Mapper.CreateMap<FROM.VirtualMachineScaleSet, TO.PSVirtualMachineScaleSet>();
             Mapper.CreateMap<FROM.VirtualMachineScaleSet, TO.PSVirtualMachineScaleSetList>();
             Mapper.CreateMap<FROM.VirtualMachineScaleSet, TO.PSVirtualMachineScaleSet>();

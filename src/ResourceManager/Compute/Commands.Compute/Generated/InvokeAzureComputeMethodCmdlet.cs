@@ -50,6 +50,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "ContainerServiceDelete",
             "ContainerServiceGet",
             "ContainerServiceList",
+            "ContainerServiceListByResourceGroup",
+            "ContainerServiceListByResourceGroupNext",
+            "ContainerServiceListNext",
             "DiskCreateOrUpdate",
             "DiskDelete",
             "DiskGet",
@@ -65,6 +68,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "ImageGet",
             "ImageList",
             "ImageListByResourceGroup",
+            "ImageListByResourceGroupNext",
             "ImageListNext",
             "SnapshotCreateOrUpdate",
             "SnapshotDelete",
@@ -90,6 +94,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "VirtualMachineScaleSetListSkusNext",
             "VirtualMachineScaleSetPowerOff",
             "VirtualMachineScaleSetReimage",
+            "VirtualMachineScaleSetReimageAll",
             "VirtualMachineScaleSetRestart",
             "VirtualMachineScaleSetStart",
             "VirtualMachineScaleSetUpdateInstances",
@@ -101,6 +106,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             "VirtualMachineScaleSetVMListNext",
             "VirtualMachineScaleSetVMPowerOff",
             "VirtualMachineScaleSetVMReimage",
+            "VirtualMachineScaleSetVMReimageAll",
             "VirtualMachineScaleSetVMRestart",
             "VirtualMachineScaleSetVMStart"
         )]
@@ -146,6 +152,15 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     case "ContainerServiceList":
                         ExecuteContainerServiceListMethod(argumentList);
                         break;
+                    case "ContainerServiceListByResourceGroup":
+                        ExecuteContainerServiceListByResourceGroupMethod(argumentList);
+                        break;
+                    case "ContainerServiceListByResourceGroupNext":
+                        ExecuteContainerServiceListByResourceGroupNextMethod(argumentList);
+                        break;
+                    case "ContainerServiceListNext":
+                        ExecuteContainerServiceListNextMethod(argumentList);
+                        break;
                     case "DiskCreateOrUpdate":
                         ExecuteDiskCreateOrUpdateMethod(argumentList);
                         break;
@@ -190,6 +205,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                         break;
                     case "ImageListByResourceGroup":
                         ExecuteImageListByResourceGroupMethod(argumentList);
+                        break;
+                    case "ImageListByResourceGroupNext":
+                        ExecuteImageListByResourceGroupNextMethod(argumentList);
                         break;
                     case "ImageListNext":
                         ExecuteImageListNextMethod(argumentList);
@@ -266,6 +284,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     case "VirtualMachineScaleSetReimage":
                         ExecuteVirtualMachineScaleSetReimageMethod(argumentList);
                         break;
+                    case "VirtualMachineScaleSetReimageAll":
+                        ExecuteVirtualMachineScaleSetReimageAllMethod(argumentList);
+                        break;
                     case "VirtualMachineScaleSetRestart":
                         ExecuteVirtualMachineScaleSetRestartMethod(argumentList);
                         break;
@@ -299,6 +320,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     case "VirtualMachineScaleSetVMReimage":
                         ExecuteVirtualMachineScaleSetVMReimageMethod(argumentList);
                         break;
+                    case "VirtualMachineScaleSetVMReimageAll":
+                        ExecuteVirtualMachineScaleSetVMReimageAllMethod(argumentList);
+                        break;
                     case "VirtualMachineScaleSetVMRestart":
                         ExecuteVirtualMachineScaleSetVMRestartMethod(argumentList);
                         break;
@@ -319,6 +343,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "ContainerServiceDelete": return CreateContainerServiceDeleteDynamicParameters();
                 case "ContainerServiceGet": return CreateContainerServiceGetDynamicParameters();
                 case "ContainerServiceList": return CreateContainerServiceListDynamicParameters();
+                case "ContainerServiceListByResourceGroup": return CreateContainerServiceListByResourceGroupDynamicParameters();
+                case "ContainerServiceListByResourceGroupNext": return CreateContainerServiceListByResourceGroupNextDynamicParameters();
+                case "ContainerServiceListNext": return CreateContainerServiceListNextDynamicParameters();
                 case "DiskCreateOrUpdate": return CreateDiskCreateOrUpdateDynamicParameters();
                 case "DiskDelete": return CreateDiskDeleteDynamicParameters();
                 case "DiskGet": return CreateDiskGetDynamicParameters();
@@ -334,6 +361,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "ImageGet": return CreateImageGetDynamicParameters();
                 case "ImageList": return CreateImageListDynamicParameters();
                 case "ImageListByResourceGroup": return CreateImageListByResourceGroupDynamicParameters();
+                case "ImageListByResourceGroupNext": return CreateImageListByResourceGroupNextDynamicParameters();
                 case "ImageListNext": return CreateImageListNextDynamicParameters();
                 case "SnapshotCreateOrUpdate": return CreateSnapshotCreateOrUpdateDynamicParameters();
                 case "SnapshotDelete": return CreateSnapshotDeleteDynamicParameters();
@@ -359,6 +387,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "VirtualMachineScaleSetListSkusNext": return CreateVirtualMachineScaleSetListSkusNextDynamicParameters();
                 case "VirtualMachineScaleSetPowerOff": return CreateVirtualMachineScaleSetPowerOffDynamicParameters();
                 case "VirtualMachineScaleSetReimage": return CreateVirtualMachineScaleSetReimageDynamicParameters();
+                case "VirtualMachineScaleSetReimageAll": return CreateVirtualMachineScaleSetReimageAllDynamicParameters();
                 case "VirtualMachineScaleSetRestart": return CreateVirtualMachineScaleSetRestartDynamicParameters();
                 case "VirtualMachineScaleSetStart": return CreateVirtualMachineScaleSetStartDynamicParameters();
                 case "VirtualMachineScaleSetUpdateInstances": return CreateVirtualMachineScaleSetUpdateInstancesDynamicParameters();
@@ -370,6 +399,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 case "VirtualMachineScaleSetVMListNext": return CreateVirtualMachineScaleSetVMListNextDynamicParameters();
                 case "VirtualMachineScaleSetVMPowerOff": return CreateVirtualMachineScaleSetVMPowerOffDynamicParameters();
                 case "VirtualMachineScaleSetVMReimage": return CreateVirtualMachineScaleSetVMReimageDynamicParameters();
+                case "VirtualMachineScaleSetVMReimageAll": return CreateVirtualMachineScaleSetVMReimageAllDynamicParameters();
                 case "VirtualMachineScaleSetVMRestart": return CreateVirtualMachineScaleSetVMRestartDynamicParameters();
                 case "VirtualMachineScaleSetVMStart": return CreateVirtualMachineScaleSetVMStartDynamicParameters();
                 default: break;

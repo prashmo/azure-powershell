@@ -51,6 +51,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation.Models
 
         protected override void Configure()
         {
+            Mapper.CreateMap<FROM.AvailabilitySet, TO.PSAvailabilitySet>();
+            Mapper.CreateMap<FROM.AvailabilitySet, TO.PSAvailabilitySetList>();
             Mapper.CreateMap<FROM.ContainerService, TO.PSContainerService>();
             Mapper.CreateMap<FROM.ContainerService, TO.PSContainerServiceList>();
             Mapper.CreateMap<FROM.Disk, TO.PSDisk>();

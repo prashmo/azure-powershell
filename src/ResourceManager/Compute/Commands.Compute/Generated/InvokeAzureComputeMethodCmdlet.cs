@@ -46,6 +46,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         [Parameter(Mandatory = true, ParameterSetName = "InvokeByDynamicParameters", Position = 0)]
         [Parameter(Mandatory = true, ParameterSetName = "InvokeByStaticParameters", Position = 0)]
         [ValidateSet(
+            "AvailabilitySetCreateOrUpdate",
+            "AvailabilitySetDelete",
+            "AvailabilitySetGet",
+            "AvailabilitySetList",
+            "AvailabilitySetListAvailableSizes",
             "ContainerServiceCreateOrUpdate",
             "ContainerServiceDelete",
             "ContainerServiceGet",
@@ -156,6 +161,21 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
                 switch (MethodName)
                 {
+                    case "AvailabilitySetCreateOrUpdate":
+                        ExecuteAvailabilitySetCreateOrUpdateMethod(argumentList);
+                        break;
+                    case "AvailabilitySetDelete":
+                        ExecuteAvailabilitySetDeleteMethod(argumentList);
+                        break;
+                    case "AvailabilitySetGet":
+                        ExecuteAvailabilitySetGetMethod(argumentList);
+                        break;
+                    case "AvailabilitySetList":
+                        ExecuteAvailabilitySetListMethod(argumentList);
+                        break;
+                    case "AvailabilitySetListAvailableSizes":
+                        ExecuteAvailabilitySetListAvailableSizesMethod(argumentList);
+                        break;
                     case "ContainerServiceCreateOrUpdate":
                         ExecuteContainerServiceCreateOrUpdateMethod(argumentList);
                         break;
@@ -403,6 +423,11 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             switch (MethodName)
             {
+                case "AvailabilitySetCreateOrUpdate": return CreateAvailabilitySetCreateOrUpdateDynamicParameters();
+                case "AvailabilitySetDelete": return CreateAvailabilitySetDeleteDynamicParameters();
+                case "AvailabilitySetGet": return CreateAvailabilitySetGetDynamicParameters();
+                case "AvailabilitySetList": return CreateAvailabilitySetListDynamicParameters();
+                case "AvailabilitySetListAvailableSizes": return CreateAvailabilitySetListAvailableSizesDynamicParameters();
                 case "ContainerServiceCreateOrUpdate": return CreateContainerServiceCreateOrUpdateDynamicParameters();
                 case "ContainerServiceDelete": return CreateContainerServiceDeleteDynamicParameters();
                 case "ContainerServiceGet": return CreateContainerServiceGetDynamicParameters();

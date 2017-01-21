@@ -189,7 +189,6 @@
     <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\Publish\ConfigurationParsingHelper.cs">
       <Link>Extension\DSC\ConfigurationParsingHelper.cs</Link>
     </Compile>
-    <Compile Include="AvailabilitySets\RemoveAzureAvailabilitySetCommand.cs" />
     <Compile Include="AvailabilitySets\GetAzureAvailabilitySetCommand.cs" />
     <Compile Include="AvailabilitySets\NewAzureAvailabilitySetCommand.cs" />
     <Compile Include="AvailabilitySets\AvailabilitySetBaseCmdlet.cs" />

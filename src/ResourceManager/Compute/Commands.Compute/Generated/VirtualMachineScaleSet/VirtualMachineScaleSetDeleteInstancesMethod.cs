@@ -133,7 +133,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             this.MethodName = "VirtualMachineScaleSetDeleteInstances";
             if (ShouldProcess(this.dynamicParameters["ResourceGroupName"].Value.ToString(), VerbsCommon.Remove)
                 && (this.dynamicParameters["Force"].IsSet ||
-                    this.ShouldContinue("This cmdlet will remove the specified resource. Do you want to continue?",
+                    this.ShouldContinue(Properties.Resources.ResourceRemovalConfirmation,
                                         "Remove-AzureRmVmss operation")))
             {
                 base.ProcessRecord();

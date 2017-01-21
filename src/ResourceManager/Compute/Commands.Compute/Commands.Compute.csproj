@@ -346,15 +346,11 @@
     <Compile Include="VirtualMachine\Operation\GetAzureVMBootDiagnosticsDataCommand.cs" />
     <Compile Include="VirtualMachine\Operation\GetAzureVMCommand.cs" />
     <Compile Include="VirtualMachine\Operation\UpdateAzureVMCommand.cs" />
-    <Compile Include="VirtualMachine\Action\RestartAzureVMCommand.cs" />
     <Compile Include="Extension\VirtualMachineExtensionBaseCmdlet.cs" />
     <Compile Include="VirtualMachine\VirtualMachineBaseCmdlet.cs" />
     <Compile Include="Common\ConstantStringTypes.cs" />
     <Compile Include="Models\PSVirtualMachine.cs" />
     <Compile Include="VirtualMachine\Operation\NewAzureVMCommand.cs" />
-    <Compile Include="VirtualMachine\Action\StartAzureVMCommand.cs" />
-    <Compile Include="VirtualMachine\Action\StopAzureVMCommand.cs" />
-    <Compile Include="VirtualMachine\Operation\RemoveAzureVMCommand.cs" />
     <Compile Include="VirtualMachine\Config\NewAzureVMConfigCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

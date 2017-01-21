@@ -221,12 +221,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 Position = 3,
                 Mandatory = true
             });
-            pInstanceView.Attributes.Add(new ParameterAttribute
-            {
-                ParameterSetName = "InvokeByStaticParametersForFriendMethod",
-                Position = 4,
-                Mandatory = true
-            });
             pInstanceView.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("InstanceView", pInstanceView);
 

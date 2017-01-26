@@ -19,11 +19,13 @@
 // Changes to this file may cause incorrect behavior and will be lost if the
 // code is regenerated.
 
-using Microsoft.Azure.Management.Compute.Models;
-
 namespace Microsoft.Azure.Commands.Compute.Automation.Models
 {
     public class PSSnapshotList : PSSnapshot
     {
+        public PSSnapshot ToPSSnapshot ()
+        {
+            return AutoMapper.Mapper.Map<PSSnapshot>(this);
+        }
     }
 }

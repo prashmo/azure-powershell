@@ -218,6 +218,9 @@ namespace Microsoft.Azure.Commands.Compute
 
             Mapper.CreateMap<AzureOperationResponse<IPage<FROM.Usage>>, TO.PSUsage>()
                 .ForMember(c => c.StatusCode, o => o.MapFrom(r => r.Response.StatusCode));
+
+            Mapper.CreateMap<TO.PSVirtualMachine, TO.PSVirtualMachineList>();
+            Mapper.CreateMap<TO.PSVirtualMachineList, TO.PSVirtualMachine>();
         }
     }
 }

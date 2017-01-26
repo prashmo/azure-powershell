@@ -19,11 +19,13 @@
 // Changes to this file may cause incorrect behavior and will be lost if the
 // code is regenerated.
 
-using Microsoft.Azure.Management.Compute.Models;
-
 namespace Microsoft.Azure.Commands.Compute.Automation.Models
 {
     public class PSVirtualMachineList : PSVirtualMachine
     {
+        public PSVirtualMachine ToPSVirtualMachine ()
+        {
+            return AutoMapper.Mapper.Map<PSVirtualMachine>(this);
+        }
     }
 }

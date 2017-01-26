@@ -97,8 +97,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 
-    [Cmdlet(VerbsCommon.Move, "AzureRmVM", DefaultParameterSetName = "InvokeByDynamicParameters")]
-    public partial class MoveAzureRmVM : InvokeAzureComputeMethodCmdlet
+    [Cmdlet(VerbsData.ConvertTo, "AzureRmVMManagedDisk", DefaultParameterSetName = "InvokeByDynamicParameters")]
+    public partial class ConvertToAzureRmVMManagedDisk : InvokeAzureComputeMethodCmdlet
     {
         public override string MethodName { get; set; }
 

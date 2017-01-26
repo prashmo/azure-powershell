@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var pDisk = new RuntimeDefinedParameter();
             pDisk.Name = "Disk";
-            pDisk.ParameterType = typeof(Disk);
+            pDisk.ParameterType = typeof(DiskUpdate);
             pDisk.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
@@ -90,13 +90,12 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = (string)ParseParameter(invokeMethodInputParameters[0]);
             string diskName = (string)ParseParameter(invokeMethodInputParameters[1]);
-            Disk diskOrg = (Disk)ParseParameter(invokeMethodInputParameters[2]);
-            DiskUpdate disk = (DiskUpdate)ParseParameter(invokeMethodInputParameters[3]);
-            if (disk == null)
-            {
-                disk = AutoMapper.Mapper.Map<DiskUpdate>(diskOrg);
-            }
-            var result = DisksClient.Update(resourceGroupName, diskName, disk);
+            DiskUpdate disk = (DiskUpdate)ParseParameter(invokeMethodInputParameters[2]);
+            Disk diskOrg = (Disk)ParseParameter(invokeMethodInputParameters[3]);
+
+            var result = (disk == null)
+                         ? DisksClient.CreateOrUpdate(resourceGroupName, diskName, diskOrg)
+                         : DisksClient.Update(resourceGroupName, diskName, disk);
             WriteObject(result);
         }
     }
@@ -145,7 +144,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             });
             pResourceGroupName.Attributes.Add(new ParameterAttribute
             {
-                ParameterSetName = "InvokeByDynamicParametersWithUpdateObject",
+                ParameterSetName = "InvokeByDynamicParametersForFriendMethod",
                 Position = 1,
                 Mandatory = true,
                 ValueFromPipelineByPropertyName = true,
@@ -167,7 +166,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             });
             pDiskName.Attributes.Add(new ParameterAttribute
             {
-                ParameterSetName = "InvokeByDynamicParametersWithUpdateObject",
+                ParameterSetName = "InvokeByDynamicParametersForFriendMethod",
                 Position = 2,
                 Mandatory = true,
                 ValueFromPipelineByPropertyName = true,
@@ -178,8 +177,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             dynamicParameters.Add("DiskName", pDiskName);
 
             var pDisk = new RuntimeDefinedParameter();
-            pDisk.Name = "Disk";
-            pDisk.ParameterType = typeof(Disk);
+            pDisk.Name = "DiskUpdate";
+            pDisk.ParameterType = typeof(DiskUpdate);
             pDisk.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
@@ -189,21 +188,21 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 ValueFromPipeline = true
             });
             pDisk.Attributes.Add(new AllowNullAttribute());
-            dynamicParameters.Add("Disk", pDisk);
+            dynamicParameters.Add("DiskUpdate", pDisk);
 
-            var pDiskUpdate = new RuntimeDefinedParameter();
-            pDiskUpdate.Name = "DiskUpdate";
-            pDiskUpdate.ParameterType = typeof(DiskUpdate);
-            pDiskUpdate.Attributes.Add(new ParameterAttribute
+            var pDiskOrg = new RuntimeDefinedParameter();
+            pDiskOrg.Name = "Disk";
+            pDiskOrg.ParameterType = typeof(Disk);
+            pDiskOrg.Attributes.Add(new ParameterAttribute
             {
-                ParameterSetName = "InvokeByDynamicParametersWithUpdateObject",
+                ParameterSetName = "InvokeByDynamicParametersForFriendMethod",
                 Position = 4,
                 Mandatory = true,
                 ValueFromPipelineByPropertyName = false,
                 ValueFromPipeline = true
             });
-            pDiskUpdate.Attributes.Add(new AllowNullAttribute());
-            dynamicParameters.Add("DiskUpdate", pDiskUpdate);
+            pDiskOrg.Attributes.Add(new AllowNullAttribute());
+            dynamicParameters.Add("Disk", pDiskOrg);
 
             return dynamicParameters;
         }

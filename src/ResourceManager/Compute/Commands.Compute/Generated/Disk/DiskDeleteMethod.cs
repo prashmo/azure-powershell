@@ -142,6 +142,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 ValueFromPipelineByPropertyName = true,
                 ValueFromPipeline = false
             });
+            pDiskName.Attributes.Add(new AliasAttribute("Name"));
             pDiskName.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("DiskName", pDiskName);
 

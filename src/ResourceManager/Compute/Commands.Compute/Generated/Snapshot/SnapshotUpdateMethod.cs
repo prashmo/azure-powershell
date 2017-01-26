@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var pSnapshot = new RuntimeDefinedParameter();
             pSnapshot.Name = "Snapshot";
-            pSnapshot.ParameterType = typeof(SnapshotUpdate);
+            pSnapshot.ParameterType = typeof(Snapshot);
             pSnapshot.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
@@ -90,8 +90,12 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         {
             string resourceGroupName = (string)ParseParameter(invokeMethodInputParameters[0]);
             string snapshotName = (string)ParseParameter(invokeMethodInputParameters[1]);
-            SnapshotUpdate snapshot = (SnapshotUpdate)ParseParameter(invokeMethodInputParameters[2]);
-
+            Snapshot snapshotOrg = (Snapshot)ParseParameter(invokeMethodInputParameters[2]);
+            SnapshotUpdate snapshot = (SnapshotUpdate)ParseParameter(invokeMethodInputParameters[3]);
+            if (snapshot == null)
+            {
+                snapshot = AutoMapper.Mapper.Map<SnapshotUpdate>(snapshotOrg);
+            }
             var result = SnapshotsClient.Update(resourceGroupName, snapshotName, snapshot);
             WriteObject(result);
         }
@@ -139,6 +143,14 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 ValueFromPipelineByPropertyName = true,
                 ValueFromPipeline = false
             });
+            pResourceGroupName.Attributes.Add(new ParameterAttribute
+            {
+                ParameterSetName = "InvokeByDynamicParametersWithUpdateObject",
+                Position = 1,
+                Mandatory = true,
+                ValueFromPipelineByPropertyName = true,
+                ValueFromPipeline = false
+            });
             pResourceGroupName.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("ResourceGroupName", pResourceGroupName);
 
@@ -153,22 +165,45 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 ValueFromPipelineByPropertyName = true,
                 ValueFromPipeline = false
             });
+            pSnapshotName.Attributes.Add(new ParameterAttribute
+            {
+                ParameterSetName = "InvokeByDynamicParametersWithUpdateObject",
+                Position = 2,
+                Mandatory = true,
+                ValueFromPipelineByPropertyName = true,
+                ValueFromPipeline = false
+            });
+            pSnapshotName.Attributes.Add(new AliasAttribute("Name"));
             pSnapshotName.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("SnapshotName", pSnapshotName);
 
             var pSnapshot = new RuntimeDefinedParameter();
             pSnapshot.Name = "Snapshot";
-            pSnapshot.ParameterType = typeof(SnapshotUpdate);
+            pSnapshot.ParameterType = typeof(Snapshot);
             pSnapshot.Attributes.Add(new ParameterAttribute
             {
                 ParameterSetName = "InvokeByDynamicParameters",
                 Position = 3,
                 Mandatory = true,
                 ValueFromPipelineByPropertyName = false,
-                ValueFromPipeline = false
+                ValueFromPipeline = true
             });
             pSnapshot.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("Snapshot", pSnapshot);
+
+            var pSnapshotUpdate = new RuntimeDefinedParameter();
+            pSnapshotUpdate.Name = "SnapshotUpdate";
+            pSnapshotUpdate.ParameterType = typeof(SnapshotUpdate);
+            pSnapshotUpdate.Attributes.Add(new ParameterAttribute
+            {
+                ParameterSetName = "InvokeByDynamicParametersWithUpdateObject",
+                Position = 4,
+                Mandatory = true,
+                ValueFromPipelineByPropertyName = false,
+                ValueFromPipeline = true
+            });
+            pSnapshotUpdate.Attributes.Add(new AllowNullAttribute());
+            dynamicParameters.Add("SnapshotUpdate", pSnapshotUpdate);
 
             return dynamicParameters;
         }

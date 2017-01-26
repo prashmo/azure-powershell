@@ -150,6 +150,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 ValueFromPipelineByPropertyName = true,
                 ValueFromPipeline = false
             });
+            pSnapshotName.Attributes.Add(new AliasAttribute("Name"));
             pSnapshotName.Attributes.Add(new AllowNullAttribute());
             dynamicParameters.Add("SnapshotName", pSnapshotName);
 

@@ -49,7 +49,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 2,
             ValueFromPipelineByPropertyName = true)]
-        public OperatingSystemStateTypes OsState { get; set; }
+        public OperatingSystemStateTypes? OsState { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -99,17 +99,22 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 this.Image.StorageProfile.OsDisk.OsType = this.OsType;
             }
 
-            // StorageProfile
-            if (this.Image.StorageProfile == null)
+            if (this.OsState.HasValue)
             {
-                this.Image.StorageProfile = new Microsoft.Azure.Management.Compute.Models.ImageStorageProfile();
+
+                // StorageProfile
+                if (this.Image.StorageProfile == null)
+                {
+                    this.Image.StorageProfile = new Microsoft.Azure.Management.Compute.Models.ImageStorageProfile();
+                }
+                // OsDisk
+                if (this.Image.StorageProfile.OsDisk == null)
+                {
+                    this.Image.StorageProfile.OsDisk = new Microsoft.Azure.Management.Compute.Models.ImageOSDisk();
+                }
+
+                this.Image.StorageProfile.OsDisk.OsState = this.OsState.Value;
             }
-            // OsDisk
-            if (this.Image.StorageProfile.OsDisk == null)
-            {
-                this.Image.StorageProfile.OsDisk = new Microsoft.Azure.Management.Compute.Models.ImageOSDisk();
-            }
-            this.Image.StorageProfile.OsDisk.OsState = this.OsState;
 
             if (this.BlobUri != null)
             {

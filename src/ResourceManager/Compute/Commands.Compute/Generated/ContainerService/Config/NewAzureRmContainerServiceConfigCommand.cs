@@ -48,7 +48,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 2,
             ValueFromPipelineByPropertyName = true)]
-        public ContainerServiceOchestratorTypes OrchestratorType { get; set; }
+        public ContainerServiceOchestratorTypes? OrchestratorType { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -139,12 +139,14 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             // DiagnosticsProfile
             Microsoft.Azure.Management.Compute.Models.ContainerServiceDiagnosticsProfile vDiagnosticsProfile = null;
 
-            if (vOrchestratorProfile == null)
+            if (this.OrchestratorType.HasValue)
             {
-                vOrchestratorProfile = new Microsoft.Azure.Management.Compute.Models.ContainerServiceOrchestratorProfile();
+                if (vOrchestratorProfile == null)
+                {
+                    vOrchestratorProfile = new Microsoft.Azure.Management.Compute.Models.ContainerServiceOrchestratorProfile();
+                }
+                vOrchestratorProfile.OrchestratorType = this.OrchestratorType.Value;
             }
-
-            vOrchestratorProfile.OrchestratorType = this.OrchestratorType;
 
             if (this.CustomProfileOrchestrator != null)
             {

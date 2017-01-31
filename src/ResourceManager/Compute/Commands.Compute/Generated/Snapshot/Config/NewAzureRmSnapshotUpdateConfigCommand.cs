@@ -112,14 +112,13 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             // EncryptionSettings
             Microsoft.Azure.Management.Compute.Models.EncryptionSettings vEncryptionSettings = null;
 
-            if (this.CreationDataCreateOption != null)
+            if (this.CreationDataCreateOption.HasValue)
             {
                 if (vCreationData == null)
                 {
                     vCreationData = new Microsoft.Azure.Management.Compute.Models.CreationData();
                 }
-
-                vCreationData.CreateOption = (DiskCreateOption) this.CreationDataCreateOption;
+                vCreationData.CreateOption = this.CreationDataCreateOption.Value;
             }
 
             if (this.StorageAccountId != null)

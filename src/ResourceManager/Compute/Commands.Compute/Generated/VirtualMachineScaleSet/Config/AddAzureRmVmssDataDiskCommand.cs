@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 4,
             ValueFromPipelineByPropertyName = true)]
-        public DiskCreateOptionTypes CreateOption { get; set; }
+        public DiskCreateOptionTypes? CreateOption { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -94,7 +94,10 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             vDataDisks.Name = this.Name;
             vDataDisks.Lun = this.Lun;
             vDataDisks.Caching = this.Caching;
-            vDataDisks.CreateOption = this.CreateOption;
+            if (this.CreateOption.HasValue)
+            {
+                vDataDisks.CreateOption = this.CreateOption.Value;
+            }
             vDataDisks.DiskSizeGB = this.DiskSizeGB;
             this.VirtualMachineScaleSet.VirtualMachineProfile.StorageProfile.DataDisks.Add(vDataDisks);
             WriteObject(this.VirtualMachineScaleSet);

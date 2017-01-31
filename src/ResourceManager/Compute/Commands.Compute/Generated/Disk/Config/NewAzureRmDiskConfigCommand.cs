@@ -66,7 +66,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 5,
             ValueFromPipelineByPropertyName = true)]
-        public DiskCreateOption CreationDataCreateOption { get; set; }
+        public DiskCreateOption? CreationDataCreateOption { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -118,12 +118,14 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             // EncryptionSettings
             Microsoft.Azure.Management.Compute.Models.EncryptionSettings vEncryptionSettings = null;
 
-            if (vCreationData == null)
+            if (this.CreationDataCreateOption.HasValue)
             {
-                vCreationData = new Microsoft.Azure.Management.Compute.Models.CreationData();
+                if (vCreationData == null)
+                {
+                    vCreationData = new Microsoft.Azure.Management.Compute.Models.CreationData();
+                }
+                vCreationData.CreateOption = this.CreationDataCreateOption.Value;
             }
-
-            vCreationData.CreateOption = this.CreationDataCreateOption;
 
             if (this.StorageAccountId != null)
             {

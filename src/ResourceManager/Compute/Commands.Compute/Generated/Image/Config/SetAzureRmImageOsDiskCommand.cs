@@ -83,7 +83,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         protected override void ProcessRecord()
         {
-            if (this.OsType != null)
+            if (this.OsType.HasValue)
             {
 
                 // StorageProfile
@@ -96,7 +96,8 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 {
                     this.Image.StorageProfile.OsDisk = new Microsoft.Azure.Management.Compute.Models.ImageOSDisk();
                 }
-                this.Image.StorageProfile.OsDisk.OsType = this.OsType;
+
+                this.Image.StorageProfile.OsDisk.OsType = this.OsType.Value;
             }
 
             if (this.OsState.HasValue)

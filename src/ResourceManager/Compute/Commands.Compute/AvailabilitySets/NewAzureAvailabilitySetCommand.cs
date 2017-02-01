@@ -63,6 +63,11 @@ namespace Microsoft.Azure.Commands.Compute
         [ValidateNotNullOrEmpty]
         public int? PlatformFaultDomainCount { get; set; }
 
+        [Parameter(
+            Position = 5,
+            ValueFromPipelineByPropertyName = true)]
+        public SwitchParameter Managed { get; set; }
+
         public override void ExecuteCmdlet()
         {
             base.ExecuteCmdlet();
@@ -73,7 +78,8 @@ namespace Microsoft.Azure.Commands.Compute
                 {
                     Location = this.Location,
                     PlatformUpdateDomainCount = this.PlatformUpdateDomainCount,
-                    PlatformFaultDomainCount = this.PlatformFaultDomainCount
+                    PlatformFaultDomainCount = this.PlatformFaultDomainCount,
+                    Managed = this.Managed.IsPresent ? (bool?) true : null
                 };
 
                 var result = this.AvailabilitySetClient.CreateOrUpdateWithHttpMessagesAsync(

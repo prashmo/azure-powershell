@@ -34,6 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Models
             }
         }
 
+        public bool? Managed { get; set; }
+
         // Gets or sets the property of 'Id'
         public string Id { get; set; }
 

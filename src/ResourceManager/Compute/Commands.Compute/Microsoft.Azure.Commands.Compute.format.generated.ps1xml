@@ -53,6 +53,10 @@
                 <PropertyName>Location</PropertyName>
               </ListItem>
               <ListItem>
+                <Label>Managed</Label>
+                <PropertyName>Managed</PropertyName>
+              </ListItem>
+              <ListItem>
                 <Label>Tags</Label>
                 <PropertyName>TagsText</PropertyName>
               </ListItem>

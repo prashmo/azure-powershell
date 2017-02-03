@@ -160,7 +160,8 @@ namespace Microsoft.Azure.Commands.Compute
 
             // AvailabilitySet => PSAvailabilitySet
             Mapper.CreateMap<FROM.AvailabilitySet, TO.PSAvailabilitySet>()
-                .ForMember(c => c.VirtualMachinesReferences, o => o.MapFrom(r => r.VirtualMachines));
+                .ForMember(c => c.VirtualMachinesReferences, o => o.MapFrom(r => r.VirtualMachines))
+                .ForMember(c => c.Sku, o => o.MapFrom(r => r.Sku.Name));
 
             Mapper.CreateMap<AzureOperationResponse<FROM.AvailabilitySet>, TO.PSAvailabilitySet>()
                 .ForMember(c => c.StatusCode, o => o.MapFrom(r => r.Response.StatusCode));

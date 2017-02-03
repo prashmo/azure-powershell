@@ -91,18 +91,22 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             var vDataDisks = new Microsoft.Azure.Management.Compute.Models.ImageDataDisk();
 
-            // Snapshot
-            vDataDisks.Snapshot = new Microsoft.Azure.Management.Compute.Models.SubResource();
-
-            // ManagedDisk
-            vDataDisks.ManagedDisk = new Microsoft.Azure.Management.Compute.Models.SubResource();
-
             vDataDisks.Lun = this.Lun;
             vDataDisks.BlobUri = this.BlobUri;
             vDataDisks.Caching = this.Caching;
             vDataDisks.DiskSizeGB = this.DiskSizeGB;
-            vDataDisks.Snapshot.Id = this.SnapshotId;
-            vDataDisks.ManagedDisk.Id = this.ManagedDiskId;
+            if (this.SnapshotId != null)
+            {
+                // Snapshot
+                vDataDisks.Snapshot = new Microsoft.Azure.Management.Compute.Models.SubResource();
+                vDataDisks.Snapshot.Id = this.SnapshotId;
+            }
+            if (this.ManagedDiskId != null)
+            {
+                // ManagedDisk
+                vDataDisks.ManagedDisk = new Microsoft.Azure.Management.Compute.Models.SubResource();
+                vDataDisks.ManagedDisk.Id = this.ManagedDiskId;
+            }
             this.Image.StorageProfile.DataDisks.Add(vDataDisks);
             WriteObject(this.Image);
         }
